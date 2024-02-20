@@ -6,8 +6,9 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
-import { Viewer, Ion, Rectangle, SingleTileImageryProvider } from "cesium";
+import * as Cesium from "cesium";
 import Heatmap from "heatmap.js";
+// import Heatmap from "";
 
 onMounted(() => {
   const container = document.createElement('div');
@@ -15,9 +16,9 @@ onMounted(() => {
   container.style.height = "400px";
   document.body.appendChild(container);
 
-  Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NmM2NzliMC0yOGZhLTRlNDgtODFhYi00NjcxODY1NDA5YTAiLCJpZCI6MTk2Mzk1LCJpYXQiOjE3MDgzMzgwODZ9.XDk23FhV0AsGpDZXOz7KIDHzvWREWdCLBFQTWHnR5WY";
+  Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NmM2NzliMC0yOGZhLTRlNDgtODFhYi00NjcxODY1NDA5YTAiLCJpZCI6MTk2Mzk1LCJpYXQiOjE3MDgzMzgwODZ9.XDk23FhV0AsGpDZXOz7KIDHzvWREWdCLBFQTWHnR5WY";
 
-  const viewer = new Viewer("cesiumContainer", {});
+  const viewer = new Cesium.Viewer("cesiumContainer", {});
 
   // 宣告 heatmap 實例
   const heatmapInstance = Heatmap.create({
@@ -55,11 +56,11 @@ onMounted(() => {
   heatmapInstance.setData(data);
 
   // 建立一個圖層，使用 heatmap 作為紋理
-  const heatmapImageryProvider = new SingleTileImageryProvider({
+  const heatmapImageryProvider = new Cesium.SingleTileImageryProvider({
     url: heatmapInstance.getDataURL(), // 使用 heatmap.js 的 getDataURL() 方法取得 heatmap 的數據
-    rectangle: Rectangle.fromDegrees(-180, -90, 180, 90), // 圖層覆蓋范圍
-    tileWidth : 256, // 示例寛度
-    tileHeight : 256 // 示例高度
+    rectangle: Cesium.Rectangle.fromDegrees(-180, -90, 180, 90), // 圖層覆蓋范圍
+    tileWidth: 256, // 示例寛度
+    tileHeight: 256 // 示例高度
   });
 
   viewer.imageryLayers.addImageryProvider(heatmapImageryProvider);
@@ -67,6 +68,7 @@ onMounted(() => {
 </script>
 
 <style>
+#app+div,
 .cesium-viewer-bottom,
 .cesium-viewer-selectionIndicatorContainer,
 .cesium-viewer-infoBoxContainer,

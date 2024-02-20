@@ -14,6 +14,13 @@ const routes = [
     component: function () {
       return import('../views/HeatMapView.vue')
     }
+  },
+  {
+    path: '/cesiumModel',
+    name: 'cesiumModel',
+    component: function () {
+      return import('../views/CesiumModelView.vue')
+    }
   }
 ]
 

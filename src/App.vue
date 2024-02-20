@@ -1,7 +1,8 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/heatMap">Heat Map</router-link>
+    <router-link to="/heatMap">Heat Map</router-link> |
+    <router-link to="/cesiumModel">Cesium Model</router-link>
   </nav>
   <router-view/>
 </template>
