@@ -3,25 +3,39 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'earth',
     component: function () {
-      return import('../views/HomeView.vue')
+      return import('../views/EarthView.vue')
     }
   },
   {
-    path: '/heatMap',
-    name: 'heatMap',
+    path: '/modal',
+    name: 'modal',
     component: function () {
-      return import('../views/HeatMapView.vue')
+      return import('../views/ModalView.vue')
     }
   },
   {
-    path: '/cesiumModel',
-    name: 'cesiumModel',
+    path: '/MH1',
+    name: '1',
     component: function () {
-      return import('../views/CesiumModelView.vue')
+      return import('../views/Model+HeatmapView_1.vue')
     }
-  }
+  },
+  {
+    path: '/MH2',
+    name: '2',
+    component: function () {
+      return import('../views/Model+HeatmapView_2.vue')
+    }
+  },
+  {
+    path: '/x',
+    name: 'x',
+    component: function () {
+      return import('../views/xView.vue')
+    }
+  },
 ]
 
 const router = createRouter({

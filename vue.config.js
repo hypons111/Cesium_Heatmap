@@ -35,7 +35,7 @@ module.exports = defineConfig({
     }
   },
   chainWebpack: config => {
-    // 只有 CESIUM AMD
+    // 只有 CESIUM 
     config.module
       .rule('cesium')
       .test(/\.js$/)

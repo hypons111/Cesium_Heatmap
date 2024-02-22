@@ -1,8 +1,10 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/heatMap">Heat Map</router-link> |
-    <router-link to="/cesiumModel">Cesium Model</router-link>
+    <router-link to="/">Earth</router-link> |
+    <router-link to="/modal">Modal</router-link> |
+    <router-link to="/MH1">Modal + Heatmap 1</router-link> |
+    <router-link to="/MH2">Modal + Heatmap 2</router-link> |
+    <router-link to="/glft">X</router-link>
   </nav>
   <router-view/>
 </template>
