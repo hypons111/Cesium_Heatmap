@@ -4,6 +4,7 @@
     <router-link to="/modal">Modal</router-link> |
     <router-link to="/MH1">Modal + Heatmap 1</router-link> |
     <router-link to="/MH2">Modal + Heatmap 2</router-link> |
+    <router-link to="/elevation">Elevation</router-link> |
     <router-link to="/glft">X</router-link>
   </nav>
   <router-view/>

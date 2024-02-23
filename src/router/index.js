@@ -30,10 +30,10 @@ const routes = [
     }
   },
   {
-    path: '/x',
-    name: 'x',
+    path: '/elevation',
+    name: 'elevation',
     component: function () {
-      return import('../views/xView.vue')
+      return import('../views/ElevationView.vue')
     }
   },
 ]

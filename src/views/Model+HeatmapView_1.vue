@@ -8,7 +8,7 @@
 import { onMounted } from "vue";
 import * as Cesium from "cesium";
 import Heatmap from "heatmap.js";
-const heatMapEnvironmentUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_environment/tilesetX1000.json";
+const heatMapEnvironmentUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_environment/tilesetX1000000.json";
 const heatMapCabinetUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_cabinet/tileset.json";
 
 onMounted(() => {
@@ -28,11 +28,20 @@ onMounted(() => {
     selectionIndicator: false, // 不顯示選擇指示器
     timeline: false, // 不顯示時間線
     navigationHelpButton: false, // 不顯示導航幫助按鈕
-    navigationInstructionsInitiallyVisible: false,
+    navigationInstructionsInitiallyVisible: false, // 不顥示導航說明
     creditContainer: undefined, // 移除版權信息容器
-    skyBox: null, // 這裡將 skyBox 設置為 null 來移除背景太空
-    baseColor: Cesium.Color.RED
+    imageryProvider: false, // 移除地球圖片
   });
+
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 8000000; // 限制視點的最近距離
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 25000000; // 限制視點的最遠距離
+  viewer.scene.globe.baseColor = Cesium.Color.WHITESMOKE; // 移除地球圖片後的地球顏色
+  viewer.scene.mode = Cesium.SceneMode.COLUMBUS_VIEW; // 使用 2.5D 模式
+  viewer.scene.sun.show = false; // 移除太陽
+  viewer.scene.moon.show = false; // 移除月亮
+  viewer.scene.skyAtmosphere.show = false; // 移除大氣層
+  viewer.scene.skyBox = undefined; // 移除太空背景
+  viewer.scene.backgroundColor = Cesium.Color.WHITESMOKE // 設定背景顏色
 
   setCesiumModel(viewer, heatMapEnvironmentUrl).then(() => {
     setHeatMap(viewer, cesiumContainer);
