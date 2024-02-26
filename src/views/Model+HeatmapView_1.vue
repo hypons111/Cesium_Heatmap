@@ -8,7 +8,7 @@
 import { onMounted } from "vue";
 import * as Cesium from "cesium";
 import Heatmap from "heatmap.js";
-const heatMapEnvironmentUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_environment/tilesetX1000000.json";
+const heatMapEnvironmentUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_environment_TEST/tileset.json";
 const heatMapCabinetUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_cabinet/tileset.json";
 
 onMounted(() => {
@@ -34,7 +34,7 @@ onMounted(() => {
   });
 
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 8000000; // 限制視點的最近距離
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 25000000; // 限制視點的最遠距離
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 20000000; // 限制視點的最遠距離
   viewer.scene.globe.baseColor = Cesium.Color.WHITESMOKE; // 移除地球圖片後的地球顏色
   viewer.scene.mode = Cesium.SceneMode.COLUMBUS_VIEW; // 使用 2.5D 模式
   viewer.scene.sun.show = false; // 移除太陽
@@ -51,9 +51,6 @@ onMounted(() => {
 async function setCesiumModel(viewer, model_url) {
   try {
     const tileset = await Cesium.Cesium3DTileset.fromUrl(model_url);
-
-    console.log(tileset)
-
     viewer.scene.primitives.add(tileset);
     viewer.zoomTo(
       tileset,  // 模型
@@ -77,21 +74,35 @@ function setHeatMap(viewer) {
   // 宣告 heatmap 實例
   const heatmapInstance = Heatmap.create({
     container: container,
-    radius: 5,
+    radius: 20,
     maxOpacity: 0.5,
     minOpacity: 0.5,
-    blur: 0.8,
+    blur: 1,
     max: 100
   });
 
   // 加資料到 heatmap
   let data = {
     max: 100,
-    data: [{
-      x: 330,
-      y: 110,
-      value: 100
-    }]
+    data: [
+      {
+        x: 330,
+        y: 90,
+        value: 100
+      },{
+        x: 330,
+        y: 105,
+        value: 100
+      },{
+        x: 330,
+        y: 120,
+        value: 100
+      },{
+        x: 330,
+        y: 135,
+        value: 100
+      },
+    ]
   };
 
   heatmapInstance.setData(data);
