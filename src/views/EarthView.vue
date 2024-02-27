@@ -34,52 +34,6 @@ onMounted(() => {
     creditContainer: undefined, // 移除版權信息容器
     skyBox: null, // 這裡將 skyBox 設置為 null 來移除背景太空
   });
-
-
-  // 宣告 heatmap 實例
-  const heatmapInstance = Heatmap.create({
-    container: container,
-    radius: 10,
-    maxOpacity: 0.5,
-    minOpacity: 0,
-    blur: 0.75
-  });
-
-  // 加資料到 heatmap
-  let points = [];
-  let max = 0;
-  let width = 840;
-  let height = 400;
-  let spotNumber = 200;
-
-  while (spotNumber--) {
-    let temputure = Math.floor(Math.random() * 100);
-    max = Math.max(max, temputure);
-    let point = {
-      x: Math.floor(Math.random() * width),
-      y: Math.floor(Math.random() * height),
-      value: temputure
-    };
-    points.push(point);
-  }
-
-  //  數據格式化
-  let data = {
-    max: max,
-    data: points
-  };
-
-  heatmapInstance.setData(data);
-
-  // 建立一個圖層，使用 heatmap 作為紋理
-  const heatmapImageryProvider = new Cesium.SingleTileImageryProvider({
-    url: heatmapInstance.getDataURL(), // 使用 heatmap.js 的 getDataURL() 方法取得 heatmap 的數據
-    rectangle: Cesium.Rectangle.fromDegrees(-180, -90, 180, 90), // 圖層覆蓋范圍
-    tileWidth: 256, // 示例寛度
-    tileHeight: 256 // 示例高度
-  });
-
-  viewer.imageryLayers.addImageryProvider(heatmapImageryProvider);
 });
 </script>
 

@@ -16,26 +16,19 @@ const routes = [
     }
   },
   {
-    path: '/MH1',
-    name: '1',
+    path: '/cmpt_1',
+    name: 'cmpt_1',
     component: function () {
-      return import('../views/Model+HeatmapView_1.vue')
+      return import('../views/cmptView_1.vue')
     }
   },
   {
-    path: '/MH2',
-    name: '2',
+    path: '/cmpt_1.5',
+    name: 'cmpt_1.5',
     component: function () {
-      return import('../views/Model+HeatmapView_2.vue')
+      return import('../views/cmptView_1.5.vue')
     }
-  },
-  {
-    path: '/elevation',
-    name: 'elevation',
-    component: function () {
-      return import('../views/ElevationView.vue')
-    }
-  },
+  }
 ]
 
 const router = createRouter({

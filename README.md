@@ -63,8 +63,23 @@ b. 無地球圖：modal 縮放、位移、旋轉
 
 
 ## 2024-02-23
-1. 將模型地板設定為半透明。
-2. 用 tileset.json 將模型放大到適合熱力圖的尺寸 (因為沒辧法設定熱力圖尺寸)。
-3. 移除移除地球圖片、設定地球底色、設定背景顏色、使用 2.5D 模式。
+**cmpt+tileset** 方法：
+1. 用 **heatmap.js** 產生熱力圖。
+2. 將熱力圖貼喺地球圖上面，之後移除地球圖貼圖再換成需要底色。
+3. 模型地板要顯示熱力圖嘅範圍做透明。
+4. 用 **tileset.json** 將模型放大到適合尺寸。
+5. 使用 **2.5D** 模式。
 
-應該就可以做到接近目標嘅效果，等 Lisa 整個半透明地板嘅模型就可以測試，唯一問題係熱力圖邊界無法控制，會超出模型嘅邊界。
+
+## 2024-02-26
+**cmpt+tileset** 方法成功，下一步就要將啲步驟模組化。
+但都係要試吓用 **.glft** 格式，始終覺得呢個方法先係正解。
+
+
+## 2024-02-27
+原來 **cesium** 要安裝 **script-loader** 嚟導入。
+
+喺屋企開一包新嘅 **cesium** 會報錯：
+`Warning Vue Router warn: Unexpected error when starting the router: – ReferenceError: Can't find variable: require ReferenceError: Can't find variable: require`，
+即係喺 vue 是完全基於 ES 模塊，唔可以用 `require` 嚟讀入文件。
+但我搵唔除咗 **vue-config.js** 之外到邊度有用 `require`，但 chat-GPT 又話因為 **vue-config.js** 係由 **node.js** 執行，所以可以用 `require`。
