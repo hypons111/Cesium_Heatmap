@@ -7,7 +7,6 @@
 <script setup>
 import { onMounted } from "vue";
 import * as Cesium from "cesium";
-import Heatmap from "heatmap.js";
 
 onMounted(() => {
   const container = document.createElement('div');

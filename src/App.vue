@@ -4,7 +4,7 @@
     <router-link to="/modal">Modal</router-link> |
     <router-link to="/cmpt_1">cmpt 1</router-link> |
     <router-link to="/cmpt_1.5">cmpt 1.5</router-link> |
-    <router-link to="/glft">X</router-link>
+    <!-- <router-link to="/glft">X</router-link> -->
   </nav>
   <router-view/>
 </template>
