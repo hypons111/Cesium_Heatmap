@@ -45,8 +45,8 @@ async function getCesiumViewer(container) {
 }
 
 async function setCesiumViewer(viewer) {
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 8000000; // 限制視點的最近距離
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 20000000; // 限制視點的最遠距離
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 5000000; // 限制視點的最近距離
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000000; // 限制視點的最遠距離
   viewer.scene.globe.baseColor = Cesium.Color.WHITESMOKE; // 移除地球圖片後的地球顏色
   viewer.scene.mode = Cesium.SceneMode.COLUMBUS_VIEW; // 使用 2.5D 模式
   viewer.scene.sun.show = false; // 移除太陽
@@ -120,7 +120,6 @@ function loadHeatMapToViewer(viewer, heatMapSpotArray) {
   };
   heatmapInstance.setData(data);
 
-
   const heatmapImageryProvider = new Cesium.SingleTileImageryProvider({
     url: heatmapInstance.getDataURL(), // 使用 heatmap.js 的 getDataURL() 方法取得 heatmap 的數據
     rectangle: Cesium.Rectangle.fromDegrees(-180, -90, 180, 90), // 圖層覆蓋范圍 (覆蓋整個地球)
@@ -129,6 +128,8 @@ function loadHeatMapToViewer(viewer, heatMapSpotArray) {
   });
 
   viewer.imageryLayers.addImageryProvider(heatmapImageryProvider);
+
+  document.body.removeChild(container);
 }
 </script>
 

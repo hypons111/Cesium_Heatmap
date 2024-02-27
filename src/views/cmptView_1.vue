@@ -115,6 +115,8 @@ function setHeatMap(viewer) {
     tileHeight: 0 // 示例高度 (唔知有乜用，放咩數值都無反應)
   });
   viewer.imageryLayers.addImageryProvider(heatmapImageryProvider);
+
+  document.body.removeChild(container);
 }
 </script>
 
