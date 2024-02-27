@@ -47,7 +47,6 @@ Cesium 而家唔支援 `tileset.readyPromise.then(function() {})`，轉用。
 3. cesium 顯示 .cmpt 模型 + 熱力圖(Opacity:0.5)
 3. cesium 顯示 .cmpt 模型 + 熱力圖(Opacity:1)
 
-
 ```
 new Cesium.HeadingPitchRange(
   0, // 角度
@@ -83,3 +82,8 @@ b. 無地球圖：modal 縮放、位移、旋轉
 `Warning Vue Router warn: Unexpected error when starting the router: – ReferenceError: Can't find variable: require ReferenceError: Can't find variable: require`，
 即係喺 vue 是完全基於 ES 模塊，唔可以用 `require` 嚟讀入文件。
 但我搵唔除咗 **vue-config.js** 之外到邊度有用 `require`，但 chat-GPT 又話因為 **vue-config.js** 係由 **node.js** 執行，所以可以用 `require`。
+
+
+## 2024-02-28
+產生 cesium viewer、heat map、模型嘅程式碼都模組化咗，放喺 **UTILS.js**
+取得模型資料嘅 URL 放喺 **MODEL_URL.js**

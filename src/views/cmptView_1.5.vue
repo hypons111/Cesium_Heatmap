@@ -6,11 +6,11 @@
 
 <script setup>
 import { onMounted } from "vue";
-import utils from "../assets/js/utils"
+import UITLS from "../assets/js/UITLS"
 import MODEL_URL from "../assets/js/MODEL_URL"
 
 onMounted(() => {
-  utils.setHeatMapModel(MODEL_URL("heatMapEnvironment"), 1000);
+  UITLS.setHeatMapModel(MODEL_URL("heatMapEnvironment"), 1000);
 });
 
 </script>
