@@ -20,10 +20,10 @@ async function setModel() {
   setCesiumViewer(viewer); // 設定 cesium viewer 屬性
   loadTilesetToViewer(viewer, heatMapEnvironmentUrl); // 加載 tileset 到 cesium viewer
   setInterval(() => {
-    loadHeatMapToViewer(viewer);  // 加載 Heat Map 到 cesium viewer
-  }, 1000);
+    const heatMapSpotArray = getHeatMapStopData(); // 取得溫度資料的 API 
+    loadHeatMapToViewer(viewer, heatMapSpotArray); // 加載 Heat Map 到 cesium viewer
+  }, 1000); // 每 1 秒更新一次熱力圖
 }
-
 
 async function getCesiumViewer(container) {
   return new Cesium.Viewer(container, {
@@ -73,7 +73,30 @@ async function loadTilesetToViewer(viewer, tilesetURL) {
   }
 }
 
-function loadHeatMapToViewer(viewer) {
+function getHeatMapStopData() {
+  const temperature = Math.ceil(Math.random() * 100)
+  return [
+    {
+      x: 330,
+      y: 90,
+      value: temperature
+    }, {
+      x: 330,
+      y: 105,
+      value: temperature
+    }, {
+      x: 330,
+      y: 120,
+      value: temperature
+    }, {
+      x: 330,
+      y: 135,
+      value: temperature
+    }
+  ]
+}
+
+function loadHeatMapToViewer(viewer, heatMapSpotArray) {
   // 建立一個圖層，使用 heatmap 作為紋理
   const container = document.createElement('div');
   container.style.width = "400px";
@@ -89,30 +112,11 @@ function loadHeatMapToViewer(viewer) {
     blur: 1,
     max: 100
   });
-  
+
   // 加資料到 heatmap
-  const temperature = Math.ceil(Math.random() * 100)
   let data = {
     max: 100,
-    data: [
-      {
-        x: 330,
-        y: 90,
-        value: temperature
-      },{
-        x: 330,
-        y: 105,
-        value: temperature
-      },{
-        x: 330,
-        y: 120,
-        value: temperature
-      },{
-        x: 330,
-        y: 135,
-        value: temperature
-      },
-    ]
+    data: heatMapSpotArray
   };
   heatmapInstance.setData(data);
 
@@ -126,7 +130,6 @@ function loadHeatMapToViewer(viewer) {
 
   viewer.imageryLayers.addImageryProvider(heatmapImageryProvider);
 }
-
 </script>
 
 <style>
