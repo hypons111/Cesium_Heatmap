@@ -33,7 +33,7 @@ async function getCesiumViewer(container) {
     selectionIndicator: false, // 不顯示選擇指示器
     timeline: false, // 不顯示時間線
     navigationHelpButton: false, // 不顯示導航幫助按鈕
-    navigationInstructionsInitiallyVisible: false, // 不顥示導航說明
+    navigationInstructionsInitiallyVisible: false, // 不顯示導航說明
     creditContainer: undefined, // 移除版權信息容器
     imageryProvider: false, // 移除地球圖片
   });
