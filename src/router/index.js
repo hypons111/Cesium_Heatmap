@@ -28,6 +28,13 @@ const routes = [
     component: function () {
       return import('../views/cmptView_1.5.vue')
     }
+  },
+  {
+    path: '/colorModal',
+    name: 'colorModal',
+    component: function () {
+      return import('../views/ColorModalView.vue')
+    }
   }
 ]
 
