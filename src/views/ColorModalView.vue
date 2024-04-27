@@ -1,6 +1,7 @@
 <template>
   <div class="">
     <div id="cesiumContainer"></div>
+    <h1>click model</h1>
   </div>
 </template>
 
@@ -8,8 +9,10 @@
 import { onMounted } from "vue";
 import * as Cesium from "cesium";
 
-const heatMapEnvironmentUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_environment/tileset.json";
-const heatMapCabinetUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_cabinet/tileset.json";
+const heatMapEnvironmentUrl =
+  "http://3d.topctek.com/model-api/nat20230926/heatmap_environment/tileset.json";
+const heatMapCabinetUrl =
+  "http://3d.topctek.com/model-api/nat20230926/heatmap_cabinet/tileset.json";
 
 onMounted(() => {
   setCesiumModel(heatMapCabinetUrl);
@@ -36,13 +39,13 @@ async function setCesiumModel(model_url) {
   });
 
   viewer.scene.skyBox = undefined;
-  viewer.scene.backgroundColor = Cesium.Color.WHITESMOKE
+  viewer.scene.backgroundColor = Cesium.Color.WHITESMOKE;
 
   try {
     const tileset = await Cesium.Cesium3DTileset.fromUrl(model_url);
     viewer.scene.primitives.add(tileset);
     viewer.zoomTo(
-      tileset,  // 模型
+      tileset, // 模型
       new Cesium.HeadingPitchRange( // 模型出現嘅大細，位置
         0, // 角度
         -0.7, // 視角
@@ -58,26 +61,24 @@ async function setCesiumModel(model_url) {
         showtilesetName(tileset, clickObject); // console.log 被點擊模塊名稱
       }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
   } catch (error) {
     console.log(`There was an error while creating the 3D tileset. ${error}`);
   }
 }
 
 function showtilesetName(tileset, clickedObject) {
-  const clickedObjectName = clickedObject.getProperty('name')
-  console.log('點擊模塊 : ' + clickedObjectName);
+  const clickedObjectName = clickedObject.getProperty("name");
+  console.log("點擊模塊 : " + clickedObjectName);
   // 設置模塊顏色
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
         [`\${name} === '${clickedObjectName}'`, `color('red')`],
-        ["true", "color('white')"] // 默認颜色
+        ["true", "color('white')"], // 默認颜色
       ],
     },
   });
 }
-
 </script>
 
 <style>

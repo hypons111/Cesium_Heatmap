@@ -9,8 +9,8 @@ import { onMounted } from "vue";
 import * as Cesium from "cesium";
 import Heatmap from "heatmap.js";
 
-const heatMapEnvironmentUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_environment/tileset.json";
-const heatMapCabinetUrl = "http://3d.topctek.com/model-api/nat20230926/heatmap_cabinet/tileset.json";
+const heatMapCabinetUrl =
+  "http://3d.topctek.com/model-api/nat20230926/heatmap_cabinet/tileset.json";
 
 onMounted(() => {
   setCesiumModel(heatMapCabinetUrl);
@@ -35,15 +35,16 @@ async function setCesiumModel(model_url) {
     creditContainer: undefined, // 移除版權信息容器
     imageryProvider: false,
   });
-  
-  viewer.scene.skyBox = undefined;  
-  viewer.scene.backgroundColor = Cesium.Color.WHITESMOKE
+
+  viewer.scene.skyBox = undefined;
+  viewer.scene.backgroundColor = Cesium.Color.WHITESMOKE;
 
   try {
     const tileset = await Cesium.Cesium3DTileset.fromUrl(model_url);
     viewer.scene.primitives.add(tileset);
+
     viewer.zoomTo(
-      tileset,  // 模型
+      tileset, // 模型
       new Cesium.HeadingPitchRange( // 模型出現嘅大細，位置
         0, // 角度
         -0.7, // 視角

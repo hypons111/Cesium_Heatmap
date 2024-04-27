@@ -11,11 +11,11 @@ async function setModel(modelURL) {
 // 模型 ＋ 熱力圖
 async function setHeatMapModel(modelURL, interval) {
   const viewer = await getCesiumViewer("cesiumContainer");
-  await setCesiumViewer(viewer); 
-  await loadTilesetToViewer(viewer, modelURL); 
+  await setCesiumViewer(viewer);
+  await loadTilesetToViewer(viewer, modelURL);
   await setInterval(() => {
-    const heatMapSpotArray = getHeatMapStopData(); 
-    loadHeatMapToViewer(viewer, heatMapSpotArray); 
+    const heatMapSpotArray = getHeatMapStopData();
+    loadHeatMapToViewer(viewer, heatMapSpotArray);
   }, interval);
 }
 

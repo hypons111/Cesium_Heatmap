@@ -8,15 +8,11 @@
 import { onMounted } from "vue";
 import * as Cesium from "cesium";
 
-onMounted(() => {
-  const container = document.createElement('div');
-  container.style.width = "840px";
-  container.style.height = "400px";
-  document.body.appendChild(container);
+onMounted(async () => {
+  Cesium.Ion.defaultAccessToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3OTgwYjIyNS0xNzlmLTQ0YWQtODRhMy1iYTAxOGRkZDQyMmYiLCJpZCI6MTk2Mzk1LCJpYXQiOjE3MTQxNDkyMDJ9.jnx-ICcOXNgxlZjN97uY3Rpdm4l0rHan8neh3fhK6RU";
 
-  Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NmM2NzliMC0yOGZhLTRlNDgtODFhYi00NjcxODY1NDA5YTAiLCJpZCI6MTk2Mzk1LCJpYXQiOjE3MDgzMzgwODZ9.XDk23FhV0AsGpDZXOz7KIDHzvWREWdCLBFQTWHnR5WY";
-
-  const viewer = new Cesium.Viewer("cesiumContainer", {
+  const viewer = await new Cesium.Viewer("cesiumContainer", {
     selectionIndicator: false, // 移除選擇指示
     animation: false, // 不顯示動畫控件
     baseLayerPicker: false, // 不顯示基礎圖層選擇器
@@ -31,7 +27,6 @@ onMounted(() => {
     navigationHelpButton: false, // 不顯示導航幫助按鈕
     navigationInstructionsInitiallyVisible: false,
     creditContainer: undefined, // 移除版權信息容器
-    skyBox: null, // 這裡將 skyBox 設置為 null 來移除背景太空
   });
 });
 </script>

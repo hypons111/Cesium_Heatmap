@@ -16,17 +16,10 @@ const routes = [
     }
   },
   {
-    path: '/cmpt_1',
-    name: 'cmpt_1',
+    path: '/template',
+    name: 'template',
     component: function () {
-      return import('../views/cmptView_1.vue')
-    }
-  },
-  {
-    path: '/cmpt_1.5',
-    name: 'cmpt_1.5',
-    component: function () {
-      return import('../views/cmptView_1.5.vue')
+      return import('../views/TemplateView.vue')
     }
   },
   {
@@ -35,7 +28,15 @@ const routes = [
     component: function () {
       return import('../views/ColorModalView.vue')
     }
+  },
+  {
+    path: '/heatmapView',
+    name: 'heatmapView',
+    component: function () {
+      return import('../views/HeatmapView.vue')
+    }
   }
+
 ]
 
 const router = createRouter({
