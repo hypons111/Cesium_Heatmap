@@ -14,8 +14,6 @@ const MODEL_URL =
 onMounted(async () => {
   window.viewer = await setViewer();
   setModel(MODEL_URL);
-  addLabel();
-  addBillboard();
 });
 
 function setViewer() {
@@ -48,8 +46,12 @@ function setViewer() {
 async function setModel(url) {
   try {
     const tileset = await Cesium.Cesium3DTileset.fromUrl(url);
-    tileset.modelMatrix = modelPostion(301.5, 514.88, -65);
-    modelAngle(50, 20, 0, tileset.modelMatrix);
+    tileset.modelMatrix = modelPostion(
+      121.56455415992997,
+      25.034086769820252,
+      -65
+    );
+    modelAngle(30, -20, 47, tileset.modelMatrix);
     modelScale(0.00001, tileset.modelMatrix);
     viewer.scene.primitives.add(tileset);
     viewer.zoomTo(
@@ -77,18 +79,14 @@ function modelPostion(longitude, latitude, height) {
 /* 角度 */
 function modelAngle(x, y, z, modelMatrix) {
   // 計算x, y, z軸旋轉角度
-  const rotationX = Cesium.Matrix3.fromRotationX(Cesium.Math.toRadians(x));
-  const rotationY = Cesium.Matrix3.fromRotationY(Cesium.Math.toRadians(y));
-  const rotationZ = Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(z));
-  const tempArray = new Cesium.Matrix3();
-  const matrix3Array = new Cesium.Matrix3();
-
-  // 乘法順序會影響結果
-  Cesium.Matrix3.multiply(rotationZ, rotationY, tempArray);
-  Cesium.Matrix3.multiply(tempArray, rotationX, matrix3Array);
-
+  const hpr = new Cesium.HeadingPitchRoll(
+    Cesium.Math.toRadians(x),
+    Cesium.Math.toRadians(y),
+    Cesium.Math.toRadians(z)
+  );
+  const rotationMatrix = Cesium.Matrix3.fromHeadingPitchRoll(hpr);
   // 套用
-  Cesium.Matrix4.multiplyByMatrix3(modelMatrix, matrix3Array, modelMatrix);
+  Cesium.Matrix4.multiplyByMatrix3(modelMatrix, rotationMatrix, modelMatrix);
 }
 
 /* 大小 */
@@ -96,37 +94,10 @@ function modelScale(scale, modelMatrix) {
   // 套用
   Cesium.Matrix4.multiplyByUniformScale(modelMatrix, scale, modelMatrix);
 }
-
-function addLabel() {
-  viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(301.5, 514.88, 40),
-    label: {
-      text: "LABEL",
-      font: "1em Helvetica",
-      fillColor: Cesium.Color.WHITE,
-      outlineColor: Cesium.Color.BLACK,
-      outlineWidth: 2,
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    },
-  });
-}
-
-function addBillboard() {
-  viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(301.5, 514.88, 25),
-    billboard: {
-      image: billboard_icon, // 图片URL地址
-      width: 32, // 像素单位
-      height: 32,
-      scale: 1.0, // 缩放比例
-      color: Cesium.Color.WHITE, // 图片的着色
-    },
-  });
-}
 </script>
 
 <style>
 .cesium-viewer-cesiumWidgetContainer canvas {
-  width: 80vw !important;
+  width: 100vw !important;
 }
 </style>
